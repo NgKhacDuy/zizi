@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-  namespace = "com.zizi.util"
+  namespace = "com.zizi.zizi_kernel"
   compileSdk = 36
 
   defaultConfig {
@@ -14,6 +14,7 @@ android {
     consumerProguardFiles("consumer-rules.pro")
   }
 
+  buildFeatures { compose = true }
   buildTypes {
     release {
       isMinifyEnabled = false
@@ -29,6 +30,10 @@ android {
 
 dependencies {
   implementation(libs.androidx.core.ktx)
+  implementation(libs.androidx.material3)
+  implementation(libs.androidx.ui.tooling.preview)
+  debugImplementation(libs.androidx.ui.tooling)
+  implementation(libs.androidx.adaptive)
   implementation(libs.androidx.appcompat)
   implementation(libs.material)
   testImplementation(libs.junit)
