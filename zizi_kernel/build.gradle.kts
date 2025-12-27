@@ -1,6 +1,7 @@
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
+  id("maven-publish")
 }
 
 android {
@@ -14,7 +15,6 @@ android {
     consumerProguardFiles("consumer-rules.pro")
   }
 
-  buildFeatures { compose = true }
   buildTypes {
     release {
       isMinifyEnabled = false
@@ -30,15 +30,20 @@ android {
 
 dependencies {
   implementation(libs.androidx.core.ktx)
-  implementation(libs.androidx.material3)
-  implementation(libs.androidx.ui.tooling.preview)
-  debugImplementation(libs.androidx.ui.tooling)
-  implementation(libs.androidx.adaptive)
-  implementation(libs.androidx.appcompat)
   implementation(libs.material)
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
   implementation(libs.timber)
   implementation(libs.logger)
+}
+
+configure<PublishingExtension> {
+  publications.create<MavenPublication>("release") {
+    groupId = "com.github.NgKhacDuy"
+    artifactId = "zizi_kernel"
+    version = "1.0.0"
+    pom.packaging = "jar"
+    artifact("${layout.buildDirectory}/libs/zizi_kernel.jar")
+  }
 }
