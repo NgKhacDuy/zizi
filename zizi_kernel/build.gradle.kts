@@ -26,6 +26,13 @@ android {
     targetCompatibility = JavaVersion.VERSION_11
   }
   kotlinOptions { jvmTarget = "11" }
+
+  publishing {
+    singleVariant("release") {
+      withSourcesJar()
+      withJavadocJar()
+    }
+  }
 }
 
 dependencies {
@@ -38,12 +45,15 @@ dependencies {
   implementation(libs.logger)
 }
 
-configure<PublishingExtension> {
-  publications.create<MavenPublication>("release") {
-    groupId = "com.github.NgKhacDuy"
-    artifactId = "zizi_kernel"
-    version = "1.0.0"
-    pom.packaging = "jar"
-    artifact("${layout.buildDirectory}/libs/zizi_kernel.jar")
+afterEvaluate {
+  publishing {
+    publications {
+      register<MavenPublication>("release") {
+        from(components["release"])
+        groupId = "com.github.NgKhacDuy"
+        artifactId = "zizi_kernel"
+        version = "1.0.0"
+      }
+    }
   }
 }
