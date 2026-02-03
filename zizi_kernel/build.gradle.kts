@@ -26,11 +26,14 @@ android {
     targetCompatibility = JavaVersion.VERSION_11
   }
   kotlinOptions { jvmTarget = "11" }
+}
 
-  publishing {
-    singleVariant("release") {
-      withSourcesJar()
-      withJavadocJar()
+publishing {
+  publications {
+    register<MavenPublication>("release") {
+      afterEvaluate {
+        from(components["release"])
+      }
     }
   }
 }
@@ -45,15 +48,3 @@ dependencies {
   implementation(libs.logger)
 }
 
-afterEvaluate {
-  publishing {
-    publications {
-      register<MavenPublication>("release") {
-        from(components["release"])
-        groupId = "com.github.NgKhacDuy"
-        artifactId = "zizi_kernel"
-        version = "1.0.0"
-      }
-    }
-  }
-}
