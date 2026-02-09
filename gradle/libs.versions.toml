@@ -9,6 +9,7 @@ appcompat = "1.7.1"
 material = "1.13.0"
 logger = "2.2.0"
 timberVersion = "5.0.1"
+koin = "3.5.3"
 
 [libraries]
 androidx-adaptive = { module = "androidx.compose.material3.adaptive:adaptive" }
@@ -24,8 +25,20 @@ material = { group = "com.google.android.material", name = "material", version.r
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timberVersion" }
 logger = { group = "com.orhanobut", name = "logger", version.ref = "logger" }
 
+# Koin
+koin-android = {group="io.insert-koin", name="koin-android", version.ref = "koin"}
+koin-androidx-compose = {group="io.insert-koin", name="koin-androidx-compose", version.ref = "koin"}
+koin-core = {group="io.insert-koin", name="koin-core", version.ref = "koin"}
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+
+[bundles]
+koin= [
+    "koin-core",
+    "koin-android",
+    "koin-androidx-compose"
+]
 

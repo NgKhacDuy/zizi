@@ -55,5 +55,7 @@ dependencies {
   androidTestImplementation(libs.androidx.espresso.core)
   implementation(libs.timber)
   implementation(libs.logger)
+
+  api(libs.bundles.koin)
 }
 
