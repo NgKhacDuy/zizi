@@ -1,4 +1,3 @@
-import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
@@ -21,6 +20,8 @@ android {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
+  configurations.all { exclude(group = "com.intellij", module = "annotations") }
+
   buildTypes {
     release {
       isMinifyEnabled = false
@@ -32,9 +33,7 @@ android {
     targetCompatibility = JavaVersion.VERSION_17
   }
   tasks.withType<KotlinJvmCompile>().configureEach {
-    compilerOptions {
-      jvmTarget.set(JvmTarget.JVM_17)
-    }
+    compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
   }
 }
 
@@ -42,8 +41,8 @@ dependencies {
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.appcompat)
   implementation(libs.material)
-    implementation(project(":zizi_kernel"))
-    testImplementation(libs.junit)
+  implementation(project(":zizi_kernel"))
+  testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
 }
