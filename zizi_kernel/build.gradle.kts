@@ -57,5 +57,6 @@ dependencies {
   implementation(libs.logger)
 
   api(libs.bundles.koin)
+  api(project(":zizi_room"))
 }
 

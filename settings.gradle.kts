@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "zizi"
 include(":app")
 include(":zizi_kernel")
+include(":zizi_room")
